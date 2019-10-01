@@ -38,6 +38,7 @@ Auth::routes();
 Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Admin
 //halaman admin : absensi masuk
 Route::prefix('absensi_masuk')->group(function() {
 	Route::get('/', 'Admin\AbsensiMasukController@index')->name('absensi_masuk');
@@ -140,4 +141,15 @@ Route::prefix('ketKeh')->group(function() {
 	//tambah
 	Route::get('/tambah', 'Admin\KetKehadiranController@create')->name('ketKeh.tambah');
 	Route::post('/create', 'Admin\KetKehadiranController@store')->name('ketKeh.save');
+});
+//end admin
+
+
+//User
+//Absensi Masuk Hal: User
+Route::prefix('/absensi_masuk_guru', 'User\AbsensiMasukGuruController')->group(function() {
+	Route::get('/', 'User\AbsensiMasukGuruController@index')->name('masuk_guru');
+	//Tambah Data 
+	Route::get('/create', 'User\AbsensiMasukGuruController@create')->name('masuk_guru.tambah');
+	Route::post('/tambah', 'User\AbsensiMasukGuruController@store')->name('masuk_guru.save');
 });

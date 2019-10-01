@@ -3,7 +3,7 @@
 Hagu | Hadir Guru
 @stop
 @section('content')
-@include('templates.banner')
+    @include('templates.banner')
 
 <!--================Feature Area =================-->
 <section class="feature_area p_120" id="feature">
@@ -45,25 +45,6 @@ Hagu | Hadir Guru
     </div>
 </section>
 <!--================End Feature Area =================-->
-
-<!--================Interior Area =================-->
-<section class="interior_area">
-    <div class="container">
-        <div class="interior_inner row">
-            <div class="col-lg-6">
-                <img class="img-fluid" src="img/interior-1.png" alt="">
-            </div>
-            <div class="col-lg-5 offset-lg-1">
-                <div class="interior_text">
-                    <h4>We Believe that Interior beautifies the Total Architecture</h4>
-                    <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed off.</p>
-                    <a class="main_btn" href="#">See Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================End Interior Area =================-->
 
 <!--================Interior Area =================-->
 <section class="interior_area interior_two">
