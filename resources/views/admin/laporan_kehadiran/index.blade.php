@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('multiauth::layouts.app')
 
 @section('title')
 Hagu | Laporan Kehadiran Guru
@@ -15,7 +15,7 @@ Hagu | Laporan Kehadiran Guru
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
-					<li class="breadcrumb-item"><a href="{{ route('absensi_pulang') }}">Absensi Pulang</a></li>
+					<li class="breadcrumb-item"><a href="{{ route('laporan_kehadiran') }}">Laporan Kehadiran</a></li>
 				</ol>
 			</div>
 		</div>
@@ -40,7 +40,21 @@ Hagu | Laporan Kehadiran Guru
 								</div>
 							</div>
 							<div class="card-body">
-								Start creating your amazing application!
+								<a href="{{ route('home') }}" class="btn btn-warning"><i class="fas fa-angle-left fa-fw"></i>Kembali</a>
+							</div>
+							<div class="card-body">
+								<table id="lap_keh" class="table table-bordered">
+									<thead>
+										<tr role="row">
+											<th>No</th>
+											<th>Nama</th>
+											<th>Jenis Kelamin</th>
+											<th>Jabatan</th>
+											<th>Aksi</th>
+										</tr>  
+									</thead>
+
+								</table>
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
@@ -55,3 +69,23 @@ Hagu | Laporan Kehadiran Guru
 		<!-- /.content -->
 
 		@stop
+		@push('scripts')
+    <script>
+     $(function(){
+      $('#lap_keh').DataTable({
+        order: [[0, 'desc']],
+        processing: true,
+        responsive: true,
+        serverSide: true,
+        ajax: '{!! route('laporan_kehadiran.data') !!}',
+        columns: [
+        {data: 'DT_RowIndex', name: 'DT_RowIndex', width: '20px',},
+        {data: 'name', name: 'name', width: '50px', orderable: true},
+        {data: 'jenis_kelamin', name: 'jenis_kelamin', width: '50px', orderable: true},
+        {data: 'jabatan', name: 'jabatan', width: '50px', orderable: true},
+        {data: 'action', name: 'action', width: '100px', orderable: false, searchable: false,},
+        ]
+      });
+    });
+  </script>
+  @endpush

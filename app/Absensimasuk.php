@@ -14,4 +14,9 @@ class Absensimasuk extends Model
     	'guru_id',
     	'kehadiran',
     ];
+
+    public function kehadiran() 
+    {
+    	return $this->belongsToMany('App/Ketkehadiran');
+    }
 }

@@ -61,7 +61,7 @@ Hagu | Administrator
 
               <div class="info-box-content">
                 <span class="info-box-text">Absensi Masuk</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-number">{{ $am->count(Auth('user')->user('id')) }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -150,7 +150,7 @@ Hagu | Administrator
 
                     <div class="progress-group">
                       Add Products to Cart
-                      <span class="float-right"><b>160</b>/200</span>
+                      <span class="float-right">{{ $am->count(Auth::user()->id) }}</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-primary" style="width: 80%"></div>
                       </div>

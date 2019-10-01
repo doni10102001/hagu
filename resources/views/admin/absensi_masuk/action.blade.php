@@ -1,6 +1,6 @@
 <form action="{{ route('absensi_masuk.delete', $id) }}" method="POST">
 	@csrf
-	<a href="" class="btn btn-sm btn-warning" title="Lihat Data">
+	<a href="{{ route('absensi_masuk.lihat', $id) }}" class="btn btn-sm btn-warning" title="Lihat Data">
 		<i class="fa fa-eye"></i>
 	</a> ||
 	<a href="{{ route('absensi_masuk.edit', $id) }}" class="btn btn-sm btn-success" title="Ubah Data">

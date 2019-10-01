@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,  
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+         Mews\Captcha\CaptchaServiceProvider::class,
 
     ],
 
@@ -227,6 +230,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\Datatables\Facades\Datatables::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
     ],
 

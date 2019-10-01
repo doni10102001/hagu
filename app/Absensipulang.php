@@ -9,10 +9,14 @@ class Absensipulang extends Model
     protected $table = 'absensi_pulang';
     protected $primaryKey = 'id';
     protected $fillable = [
-    	'id',
     	'enkripsi',
     	'waktu_scan',
     	'guru_id',
     	'kehadiran',
     ];
+
+     public function kehadiran() 
+    {
+    	return $this->belongsToMany('App/Ketkehadiran');
+    }
 }

@@ -32,16 +32,26 @@
           <a href="" class="nav-link">Beranda</a>
         </li>
       </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item d-none d-sm-inline-block">
+          <a class="nav-link">
+            <div class="row">
+              <div id="date"></div>
+              <div class="ml-2" id="time"> </div>
+            </div>
+          </a>
+        </li>
+      </ul>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="" class="brand-link">
+      <a href="{{ route('admin.home') }}" class="brand-link">
         <img src="{{ asset('image/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
         style="opacity: .8">
-        <span class="brand-text font-weight-light">Hagu</span>
+        <span class="brand-text font-weight-light"><b>Hagu</b></span>
       </a>
 
       <!-- Sidebar -->
@@ -52,7 +62,12 @@
             <img src="{{ asset('image/profil.jpg') }}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="{{ route('profile_admin') }}" class="d-block">{{ Auth::user()->name }}</a>
+            <a href="{{ route('admin.show') }}" class="d-block">{{ auth('admin')->user()->name }}</a>
+            <div>
+              <sup>
+                <i class="fas fa-circle fa-sm text-primary"></i> <font style="color: rgba(255,255,255,.8);">{{ Auth('admin')->user()->active? 'Online' : 'Offline' }}</font>
+              </sup>
+            </div>
           </div>
         </div>
 
@@ -64,7 +79,7 @@
            <li class="nav-item has-treeview menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link active">
+                <a href="{{ route('admin.home') }}" class="nav-link active">
                   <i class="fas fa-home fas-fw nav-icon"></i>
                   <p>Dashboard</p>
                 </a>
@@ -73,7 +88,7 @@
           </li>
           <li class="nav-header">MANAJEMEN DATA</li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="{{ route('guru') }}" class="nav-link">
               <i class="nav-icon fas fa-chalkboard-teacher fas-fw"></i>
               <p>
                Guru
@@ -102,26 +117,56 @@
             </a>
           </li>
         </ul>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-qrcode"></i>
+            <p>
+             QR Kode
+             <i class="fas fa-angle-left right"></i>
+           </p>
+         </a>
+         <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{ route('qr') }}" class="nav-link">
+              <i class="fas fa-thumbtack nav-icon"></i>
+              <p>Absensi Masuk</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('qr_out') }}" class="nav-link">
+              <i class="fas fa-thumbtack nav-icon"></i>
+              <p>Absensi Pulang</p>
+            </a>
+          </li>
+        </ul>
         <li class="nav-item">
-          <a href="{{ route('laporan_kehadiran') }}" class="nav-link">
+          <a href="{{ route('ketKeh') }}" class="nav-link">
             <i class="nav-icon far fa-file-alt fas-fw"></i>
             <p>
-             Laporan Kehadiran
+             Ket. Kehadiran
            </p>
          </a>
        </li>
        <li class="nav-item">
-        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();" class="nav-link">
-        <i class="nav-icon fas fa-power-off fas-fw"></i>
-        <p> 
-         Keluar
-       </p>
-       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-      </form>
-    </a>
-  </li>
+        <a href="{{ route('laporan_kehadiran') }}" class="nav-link">
+          <i class="nav-icon far fa-file-alt fas-fw"></i>
+          <p>
+           Laporan Kehadiran
+         </p>
+       </a>
+     </li>
+     <li class="nav-item">
+      <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();
+      document.getElementById('logout-form').submit();" class="nav-link">
+      <i class="nav-icon fas fa-power-off fas-fw"></i>
+      <p> 
+       Keluar
+     </p>
+     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+    </form>
+  </a>
+</li>
 </ul>
 </nav>
 <!-- /.sidebar-menu -->
@@ -170,6 +215,9 @@
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 
+{{-- Show Hide --}}
+<script src="{{ asset('js/showhide.js') }}"></script>
+
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
 <script src="{{ asset('plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
@@ -179,6 +227,11 @@
 <!-- ChartJS -->
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
+{{-- Time --}}
+<script src="{{ asset('js/time.js') }}"></script>
+{{-- Date --}}
+<script src="{{ asset('js/date.js') }}"></script>
+
 {{-- Datatables tools --}}
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
@@ -187,9 +240,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-
-<!-- PAGE SCRIPTS -->
-{{-- <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script> --}}
 
 @stack('scripts')
 

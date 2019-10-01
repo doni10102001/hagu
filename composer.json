@@ -9,9 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "bitfumes/laravel-multiauth": "^2.1",
         "fideloper/proxy": "^4.0",
+        "intervention/image": "^2.5",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
+        "mews/captcha": "^3.0",
+        "simplesoftwareio/simple-qrcode": "^2.0",
         "yajra/laravel-datatables-oracle": "^9.6"
     },
     "require-dev": {

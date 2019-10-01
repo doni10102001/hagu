@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('multiauth::layouts.app')
 
 @section('title')
 Hagu | Man. Absensi Masuk
@@ -14,8 +14,8 @@ Hagu | Man. Absensi Masuk
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
-          <li class="breadcrumb-item"><a href="{{ route('absensi_masuk') }}">Absensi Masuk</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-dark">Beranda</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('absensi_masuk') }}" class="text-dark">Absensi Masuk</a></li>
         </ol>
       </div>
     </div>
@@ -30,7 +30,8 @@ Hagu | Man. Absensi Masuk
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <a href="{{ route('home') }}" class="btn btn-warning" target="__blank"><i class="fas fa-angle-left fa-fw"></i>Kembali</a>
+            <a href="{{ route('admin.home') }}" class="btn btn-warning"><i class="fas fa-angle-left fa-fw"></i>Kembali</a>
+            <a href="{{ route('absensi_masuk.tambah') }}" class="btn btn-success"><i class="fas fa-plus-circle fa-fw"></i>Tambah Data</a>
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                 <i class="fas fa-minus"></i></button>

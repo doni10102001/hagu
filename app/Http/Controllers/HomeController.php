@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Absensimasuk;
+use App\Absensipulang;
 
 class HomeController extends Controller
 {
@@ -23,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $am = Absensimasuk::All();
+        $ap =Absensipulang::All();
+
+        return view('home', compact('am', 'ap'));
     }
     public function admin()
     {

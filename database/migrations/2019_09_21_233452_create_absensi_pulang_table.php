@@ -16,9 +16,11 @@ class CreateAbsensiPulangTable extends Migration
         Schema::create('absensi_pulang', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('enkripsi')->nullable();
-            $table->timestamp('waktu_scan')->nullable();
-            $table->boolean('guru_id');
-            $table->boolean('kehadiran');
+            $table->string('waktu_scan')->nullable();
+            $table->string('guru_id');
+            $table->string('kehadiran');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

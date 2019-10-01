@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Absensipulang;
+use App\Ketkehadiran;
+use DataTables;
 
 class AbsensiPulangController extends Controller
 {
@@ -19,6 +21,14 @@ class AbsensiPulangController extends Controller
         return view('admin.absensi_pulang.index', compact('absensi_pulang'));
     }
 
+    public function AbsensiPulangDatatables()
+    {
+        $absensi_pulang = Absensipulang::All();
+        return Datatables::of($absensi_pulang)->addColumn('action', 'admin.absensi_pulang.action')
+        ->addIndexColumn()
+        ->make(true);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +36,8 @@ class AbsensiPulangController extends Controller
      */
     public function create()
     {
-        //
+        $absensi_pulangket = Ketkehadiran::All();
+        return view('admin.absensi_pulang.add', compact('absensi_pulangket'));
     }
 
     /**
@@ -37,7 +48,13 @@ class AbsensiPulangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $absensi_pulang = new Absensipulang;
+        $absensi_pulang->enkripsi = $request->enkripsi;
+        $absensi_pulang->waktu_scan = $request->waktu_scan;
+        $absensi_pulang->guru_id = $request->guru_id;
+        $absensi_pulang->kehadiran = $request->kehadiran;
+        $absensi_pulang->save();
+        return redirect()->route('absensi_pulang');
     }
 
     /**
@@ -48,7 +65,8 @@ class AbsensiPulangController extends Controller
      */
     public function show($id)
     {
-        //
+        $absensi_pulang = Absensipulang::find($id);
+        return view('admin.absensi_pulang.lihat', compact('absensi_pulang'));
     }
 
     /**
@@ -59,7 +77,8 @@ class AbsensiPulangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $absensi_pulang = Absensipulang::find($id);
+        return view('admin.absensi_pulang.ubah', compact('absensi_pulang'));
     }
 
     /**
@@ -71,7 +90,13 @@ class AbsensiPulangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $absensi_pulang = Absensipulang::find($id);
+        $absensi_pulang->enkripsi = $request->enkripsi;
+        $absensi_pulang->waktu_scan = $request->waktu_scan;
+        $absensi_pulang->guru_id = $request->guru_id;
+        $absensi_pulang->kehadiran = $request->kehadiran;
+        $absensi_pulang->save();
+        return redirect()->route('absensi_pulang');
     }
 
     /**
@@ -82,6 +107,8 @@ class AbsensiPulangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $absensi_pulang = Absensipulang::find($id);
+        $absensi_pulang->delete();
+        return redirect()->route('absensi_pulang');
     }
 }

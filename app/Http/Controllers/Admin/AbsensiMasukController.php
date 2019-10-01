@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Absensimasuk;
+use App\Ketkehadiran;
 use DataTables;
 
 class AbsensiMasukController extends Controller
@@ -35,7 +36,8 @@ class AbsensiMasukController extends Controller
      */
     public function create()
     {
-        //
+        $absensi_masukket = Ketkehadiran::All();
+        return view('admin.absensi_masuk.add', compact('absensi_masukket'));
     }
 
     /**
@@ -46,7 +48,13 @@ class AbsensiMasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $absensi_masuk = new Absensimasuk;
+        $absensi_masuk->enkripsi = $request->enkripsi;
+        $absensi_masuk->waktu_scan = $request->waktu_scan;
+        $absensi_masuk->guru_id = $request->guru_id;
+        $absensi_masuk->kehadiran = $request->kehadiran;
+        $absensi_masuk->save();
+        return redirect()->route('absensi_masuk');
     }
 
     /**
@@ -57,7 +65,8 @@ class AbsensiMasukController extends Controller
      */
     public function show($id)
     {
-        //
+        $absensi_masuk = Absensimasuk::find($id);
+        return view('admin.absensi_masuk.lihat', compact('absensi_masuk'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Image;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -63,10 +64,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $foto = $data('foto');
+        $filename = time() .'.'. $foto->getClientOriginalExtension();
+        Image::make($foto)->resize(400, 400)->save(public_path('image/guru/' .$filename));
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'foto' => $filename,
+            'nik' => $data['nik'],
+            'tmpat_lahir' => $data['tmpat_lahir'],
+            'tgl_lahir' => $data['tgl_lahir'],
+            'alamat' => $data['alamat'],
+            'rt' => $data['rt'],
+            'rw'=> $data['rw'],
+            'desa' => $data['desa'],
+            'kec' => $data['kec'],
+            'kab' => $data['kab'],
+            'jenis_kelamin' => $data['jenis_kelamin'],
+            'jabatan' => $data['jabatan'],
         ]);
     }
 }

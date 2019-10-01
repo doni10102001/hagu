@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Absensimasuk;
+use App\Absensipulang;
+use DataTables;
 
 class LaporanKehadiranController extends Controller
 {
@@ -17,6 +21,13 @@ class LaporanKehadiranController extends Controller
         return view('admin.laporan_kehadiran.index');
     }
 
+    public function LaporanKehadiranDatatables() 
+    {
+       $ketKeh = User::All();
+       return Datatables::of($ketKeh)->addColumn('action', 'admin.laporan_kehadiran.action')
+       ->addIndexColumn()
+       ->make(true);
+   }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,8 +56,9 @@ class LaporanKehadiranController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $user = User::find($id);
+        return view('admin.laporan_kehadiran.data_laporan', compact('user'));
     }
 
     /**
